@@ -1,15 +1,15 @@
 package syncer
 
 import (
-	"backend"
-	"config"
+	"github.com/thinkdb/radon/src/backend"
+	"github.com/thinkdb/radon/src/config"
 	"context"
 	"crypto/sha1"
 	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 	"time"
 
 	"github.com/ant0ine/go-json-rest/rest"

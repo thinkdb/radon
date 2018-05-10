@@ -9,8 +9,8 @@
 package optimizer
 
 import (
-	"planner"
-	"router"
+	"github.com/thinkdb/radon/src/planner"
+	"github.com/thinkdb/radon/src/router"
 
 	"github.com/pkg/errors"
 
@@ -48,25 +48,25 @@ func (so *SimpleOptimizer) BuildPlanTree() (*planner.PlanTree, error) {
 	database := so.database
 	query := so.query
 	node := so.node
-	router := so.router
+	routerNew := so.router
 
 	plans := planner.NewPlanTree()
 	switch node.(type) {
 	case *sqlparser.DDL:
-		node := planner.NewDDLPlan(log, database, query, node.(*sqlparser.DDL), router)
+		node := planner.NewDDLPlan(log, database, query, node.(*sqlparser.DDL), routerNew)
 		plans.Add(node)
 	case *sqlparser.Insert:
-		node := planner.NewInsertPlan(log, database, query, node.(*sqlparser.Insert), router)
+		node := planner.NewInsertPlan(log, database, query, node.(*sqlparser.Insert), routerNew)
 		plans.Add(node)
 	case *sqlparser.Delete:
-		node := planner.NewDeletePlan(log, database, query, node.(*sqlparser.Delete), router)
+		node := planner.NewDeletePlan(log, database, query, node.(*sqlparser.Delete), routerNew)
 		plans.Add(node)
 	case *sqlparser.Update:
-		node := planner.NewUpdatePlan(log, database, query, node.(*sqlparser.Update), router)
+		node := planner.NewUpdatePlan(log, database, query, node.(*sqlparser.Update), routerNew)
 		plans.Add(node)
 	case *sqlparser.Select:
 		nod := node.(*sqlparser.Select)
-		selectNode := planner.NewSelectPlan(log, database, query, nod, router)
+		selectNode := planner.NewSelectPlan(log, database, query, nod, routerNew)
 		plans.Add(selectNode)
 	default:
 		return nil, errors.Errorf("optimizer.unsupported.query.type[%+v]", node)

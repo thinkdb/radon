@@ -9,7 +9,7 @@
 package fakedb
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"fmt"
 	"sync"
 

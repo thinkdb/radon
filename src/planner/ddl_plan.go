@@ -13,9 +13,9 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 	"strings"
-	"xcontext"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/xelabs/go-mysqlstack/sqlparser"
 	"github.com/xelabs/go-mysqlstack/sqlparser/depends/hack"

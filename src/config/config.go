@@ -11,7 +11,7 @@ package config
 import (
 	"encoding/json"
 	"io/ioutil"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/pkg/errors"
 )

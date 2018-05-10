@@ -10,7 +10,7 @@ package cmd
 
 import (
 	"net/http"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/spf13/cobra"
 )

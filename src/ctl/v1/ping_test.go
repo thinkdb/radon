@@ -10,7 +10,7 @@ package v1
 
 import (
 	"errors"
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 
 	"github.com/ant0ine/go-json-rest/rest"
@@ -21,19 +21,19 @@ import (
 
 func TestCtlV1Ping(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("select .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("select .*", &sqltypes.Result{})
 	}
 
 	{
 		// server
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/radon/ping", PingHandler(log, proxy)),
+			rest.Get("/v1/radon/ping", PingHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()
@@ -46,18 +46,18 @@ func TestCtlV1Ping(t *testing.T) {
 
 func TestCtlV1PingError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryError("select 1", errors.New("mock.ping.error"))
+		fakeDbs.AddQueryError("select 1", errors.New("mock.ping.error"))
 	}
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Get("/v1/radon/ping", PingHandler(log, proxy)),
+		rest.Get("/v1/radon/ping", PingHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()

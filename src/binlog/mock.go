@@ -10,7 +10,7 @@ package binlog
 
 import (
 	"errors"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 )
 
 var (

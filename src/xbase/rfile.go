@@ -17,7 +17,7 @@ import (
 	"sort"
 	"strings"
 	"time"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 )
 
 const (

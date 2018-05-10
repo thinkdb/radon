@@ -10,7 +10,7 @@ package proxy
 
 import (
 	"strings"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/common"
 	"github.com/xelabs/go-mysqlstack/driver"

@@ -9,8 +9,8 @@
 package cmd
 
 import (
-	"ctl"
-	"proxy"
+	"github.com/thinkdb/radon/src/ctl"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 	"time"
 

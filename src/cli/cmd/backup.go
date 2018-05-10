@@ -11,7 +11,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/spf13/cobra"
 	streamer "github.com/xelabs/go-mydumper/src/common"

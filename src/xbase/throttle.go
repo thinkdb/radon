@@ -11,7 +11,7 @@ package xbase
 import (
 	"sync"
 	"time"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 
 	"github.com/beefsack/go-rate"
 )

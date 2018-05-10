@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 )
 
 var emitStats = flag.Bool("emit_stats", false, "true iff we should emit stats to push-based monitoring/stats backends")

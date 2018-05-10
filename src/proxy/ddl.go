@@ -10,7 +10,7 @@ package proxy
 
 import (
 	"fmt"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 	"strings"
 
 	"github.com/xelabs/go-mysqlstack/driver"

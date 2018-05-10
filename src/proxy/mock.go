@@ -9,8 +9,8 @@
 package proxy
 
 import (
-	"config"
-	"fakedb"
+	"github.com/thinkdb/radon/src/config"
+	"github.com/thinkdb/radon/src/fakedb"
 	"fmt"
 	"math/rand"
 	"os"

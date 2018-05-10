@@ -9,7 +9,7 @@
 package syncer
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -18,7 +18,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/common"
 	"github.com/xelabs/go-mysqlstack/xlog"

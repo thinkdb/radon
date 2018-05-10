@@ -9,7 +9,7 @@
 package router
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"fmt"
 	"sort"
 

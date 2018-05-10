@@ -9,7 +9,7 @@
 package ctl
 
 import (
-	"ctl/v1"
+	"github.com/thinkdb/radon/src/ctl/v1"
 
 	"github.com/ant0ine/go-json-rest/rest"
 )

@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"strings"
 	"sync"
 	"testing"
@@ -25,15 +25,15 @@ import (
 
 func TestCtlV1Processlist(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
-		fakedbs.AddQueryPattern("select .*", &sqltypes.Result{})
-		fakedbs.AddQueryDelay("select * from test.t1_0000 as t1", &sqltypes.Result{}, 1000)
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("select .*", &sqltypes.Result{})
+		fakeDbs.AddQueryDelay("select * from test.t1_0000 as t1", &sqltypes.Result{}, 1000)
 	}
 
 	// create test table.
@@ -70,7 +70,7 @@ func TestCtlV1Processlist(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/debug/processlist", ProcesslistHandler(log, proxy)),
+			rest.Get("/v1/debug/processlist", ProcesslistHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()

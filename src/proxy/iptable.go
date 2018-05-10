@@ -9,7 +9,7 @@
 package proxy
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"sync"
 
 	"github.com/xelabs/go-mysqlstack/xlog"

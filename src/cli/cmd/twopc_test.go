@@ -9,8 +9,8 @@
 package cmd
 
 import (
-	"ctl"
-	"proxy"
+	"github.com/thinkdb/radon/src/ctl"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 	"time"
 
@@ -18,10 +18,10 @@ import (
 )
 
 func TestCmdTwopc(t *testing.T) {
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyProxy, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
-	admin := ctl.NewAdmin(log, proxy)
+	admin := ctl.NewAdmin(log, proxyProxy)
 	admin.Start()
 	defer admin.Stop()
 	time.Sleep(100)

@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 )
 
 // Histogram tracks counts and totals while

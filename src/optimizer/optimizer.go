@@ -9,7 +9,7 @@
 package optimizer
 
 import (
-	"planner"
+	"github.com/thinkdb/radon/src/planner"
 )
 
 // Optimizer interface.

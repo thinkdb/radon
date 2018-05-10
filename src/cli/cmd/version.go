@@ -9,7 +9,7 @@
 package cmd
 
 import (
-	"build"
+	"github.com/thinkdb/radon/src/build"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -26,6 +26,6 @@ func NewVersionCommand() *cobra.Command {
 }
 
 func versionCommandFn(cmd *cobra.Command, args []string) {
-	build := build.GetInfo()
-	fmt.Printf("radoncli:[%+v]\n", build)
+	buildInfo := build.GetInfo()
+	fmt.Printf("radoncli:[%+v]\n", buildInfo)
 }

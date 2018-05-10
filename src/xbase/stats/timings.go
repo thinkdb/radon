@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 )
 
 // Timings is meant to tracks timing data

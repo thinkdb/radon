@@ -9,15 +9,15 @@
 package syncer
 
 import (
-	"backend"
-	"config"
+	"github.com/thinkdb/radon/src/backend"
+	"github.com/thinkdb/radon/src/config"
 	"encoding/json"
 	"os"
 	"path"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 	"sync"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )

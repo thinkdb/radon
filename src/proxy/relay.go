@@ -9,15 +9,15 @@
 package proxy
 
 import (
-	"binlog"
-	"config"
+	"github.com/thinkdb/radon/src/binlog"
+	"github.com/thinkdb/radon/src/config"
 	"fmt"
 	"strings"
 	"sync"
 	"time"
-	"xbase"
-	"xbase/stats"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase"
+	"github.com/thinkdb/radon/src/xbase/stats"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )
@@ -97,7 +97,7 @@ func (br *BackupRelay) Init() error {
 func (br *BackupRelay) initSQLWorker() {
 	log := br.log
 	spanner := br.spanner
-	binlog := spanner.binlog
+	binlogNew := spanner.binlog
 	relayInfo := br.relayInfo
 
 	ts, err := relayInfo.ReadTs()
@@ -108,7 +108,7 @@ func (br *BackupRelay) initSQLWorker() {
 	br.resetGTID.Set(ts)
 
 	// Get the ts from the relay.info file.
-	sqlworker, err := binlog.NewSQLWorker(ts)
+	sqlworker, err := binlogNew.NewSQLWorker(ts)
 	if err != nil {
 		log.Panic("backup.relay.to.backup.new.sqlworker.error:%v", err)
 	}
@@ -118,8 +118,8 @@ func (br *BackupRelay) initSQLWorker() {
 
 func (br *BackupRelay) closeSQLWorker() {
 	if br.sqlworker != nil {
-		binlog := br.spanner.binlog
-		defer binlog.CloseSQLWorker(br.sqlworker)
+		binlogNew := br.spanner.binlog
+		defer binlogNew.CloseSQLWorker(br.sqlworker)
 	}
 }
 
@@ -228,19 +228,19 @@ func (br *BackupRelay) checkRelayWorkerRestart() {
 	if br.initGTID.Get() < br.resetGTID.Get() {
 		log := br.log
 		spanner := br.spanner
-		binlog := spanner.binlog
+		binlogNew := spanner.binlog
 
 		oldGTID := br.initGTID.Get()
 		newGTID := br.resetGTID.Get()
 		old := br.sqlworker
-		new, err := binlog.NewSQLWorker(newGTID)
+		newSqlWorker, err := binlogNew.NewSQLWorker(newGTID)
 		if err != nil {
 			log.Panic("backup.relay.restart.new.sqlworker.error:%v", err)
 		}
 
-		log.Info("backup.relay.restart.sqlworker.old[bin:%v, pos:%v].new[bin:%v, pos:%v].GTID.from[%v].to[%v]", old.RelayName(), old.RelayPosition(), new.RelayName(), new.RelayPosition(), oldGTID, newGTID)
-		binlog.CloseSQLWorker(old)
-		br.sqlworker = new
+		log.Info("backup.relay.restart.sqlworker.old[bin:%v, pos:%v].new[bin:%v, pos:%v].GTID.from[%v].to[%v]", old.RelayName(), old.RelayPosition(), newSqlWorker.RelayName(), newSqlWorker.RelayPosition(), oldGTID, newGTID)
+		binlogNew.CloseSQLWorker(old)
+		br.sqlworker = newSqlWorker
 		br.initGTID.Set(newGTID)
 	}
 }

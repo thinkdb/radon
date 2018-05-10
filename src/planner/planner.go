@@ -8,7 +8,6 @@
 
 package planner
 
-import ()
 
 // Plan interface.
 type Plan interface {

@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"strings"
 	"testing"
 
@@ -23,13 +23,13 @@ import (
 
 func TestCtlV1Versionz(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
 	}
 
 	// create test table.
@@ -44,7 +44,7 @@ func TestCtlV1Versionz(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/meta/versions", VersionzHandler(log, proxy)),
+			rest.Get("/v1/meta/versions", VersionzHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()
@@ -59,13 +59,13 @@ func TestCtlV1Versionz(t *testing.T) {
 
 func TestCtlV1VersionCheck(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
 	}
 
 	// create test table.
@@ -80,7 +80,7 @@ func TestCtlV1VersionCheck(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/meta/versioncheck", VersionCheckHandler(log, proxy)),
+			rest.Get("/v1/meta/versioncheck", VersionCheckHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()
@@ -96,13 +96,13 @@ func TestCtlV1VersionCheck(t *testing.T) {
 
 func TestCtlV1Metaz(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
 	}
 
 	// create test table.
@@ -117,7 +117,7 @@ func TestCtlV1Metaz(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/meta/metas", MetazHandler(log, proxy)),
+			rest.Get("/v1/meta/metas", MetazHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()

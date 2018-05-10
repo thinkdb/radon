@@ -10,7 +10,7 @@ package proxy
 
 import (
 	"fmt"
-	"optimizer"
+	"github.com/thinkdb/radon/src/optimizer"
 	"regexp"
 
 	"github.com/pkg/errors"

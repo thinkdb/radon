@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"strings"
 	"sync"
 	"testing"

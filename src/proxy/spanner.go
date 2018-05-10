@@ -9,13 +9,13 @@
 package proxy
 
 import (
-	"audit"
-	"backend"
-	"binlog"
-	"config"
-	"router"
-	"xbase"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/audit"
+	"github.com/thinkdb/radon/src/backend"
+	"github.com/thinkdb/radon/src/binlog"
+	"github.com/thinkdb/radon/src/config"
+	"github.com/thinkdb/radon/src/router"
+	"github.com/thinkdb/radon/src/xbase"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 
 	"github.com/xelabs/go-mysqlstack/driver"
 	"github.com/xelabs/go-mysqlstack/xlog"

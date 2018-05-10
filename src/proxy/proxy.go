@@ -9,14 +9,14 @@
 package proxy
 
 import (
-	"audit"
-	"backend"
-	"binlog"
-	"config"
-	"router"
+	"github.com/thinkdb/radon/src/audit"
+	"github.com/thinkdb/radon/src/backend"
+	"github.com/thinkdb/radon/src/binlog"
+	"github.com/thinkdb/radon/src/config"
+	"github.com/thinkdb/radon/src/router"
 	"sync"
-	"syncer"
-	"xbase"
+	"github.com/thinkdb/radon/src/syncer"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/driver"
 	"github.com/xelabs/go-mysqlstack/xlog"
@@ -42,20 +42,20 @@ type Proxy struct {
 
 // NewProxy creates new proxy.
 func NewProxy(log *xlog.Log, path string, conf *config.Config) *Proxy {
-	audit := audit.NewAudit(log, conf.Audit)
-	router := router.NewRouter(log, conf.Proxy.MetaDir, conf.Router)
+	auditNew := audit.NewAudit(log, conf.Audit)
+	routerNew := router.NewRouter(log, conf.Proxy.MetaDir, conf.Router)
 	scatter := backend.NewScatter(log, conf.Proxy.MetaDir)
-	syncer := syncer.NewSyncer(log, conf.Proxy.MetaDir, conf.Proxy.PeerAddress, router, scatter)
-	binlog := binlog.NewBinlog(log, conf.Binlog)
+	syncerNew := syncer.NewSyncer(log, conf.Proxy.MetaDir, conf.Proxy.PeerAddress, routerNew, scatter)
+	binlogNew := binlog.NewBinlog(log, conf.Binlog)
 	return &Proxy{
 		log:      log,
 		conf:     conf,
 		confPath: path,
-		audit:    audit,
-		router:   router,
+		audit:    auditNew,
+		router:   routerNew,
 		scatter:  scatter,
-		syncer:   syncer,
-		binlog:   binlog,
+		syncer:   syncerNew,
+		binlog:   binlogNew,
 		sessions: NewSessions(log),
 		iptable:  NewIPTable(log, conf.Proxy),
 		throttle: xbase.NewThrottle(0),
@@ -66,12 +66,12 @@ func NewProxy(log *xlog.Log, path string, conf *config.Config) *Proxy {
 func (p *Proxy) Start() {
 	log := p.log
 	conf := p.conf
-	audit := p.audit
+	auditNew := p.audit
 	iptable := p.iptable
-	syncer := p.syncer
-	router := p.router
+	syncerNew := p.syncer
+	routerNew := p.router
 	scatter := p.scatter
-	binlog := p.binlog
+	binlogNew := p.binlog
 	sessions := p.sessions
 	endpoint := conf.Proxy.Endpoint
 	throttle := p.throttle
@@ -79,23 +79,23 @@ func (p *Proxy) Start() {
 	log.Info("proxy.config[%+v]...", conf.Proxy)
 	log.Info("log.config[%+v]...", conf.Log)
 
-	if err := audit.Init(); err != nil {
+	if err := auditNew.Init(); err != nil {
 		log.Panic("proxy.audit.init.panic:%+v", err)
 	}
-	if err := syncer.Init(); err != nil {
+	if err := syncerNew.Init(); err != nil {
 		log.Panic("proxy.syncer.init.panic:%+v", err)
 	}
-	if err := binlog.Init(); err != nil {
+	if err := binlogNew.Init(); err != nil {
 		log.Panic("proxy.binlog.init.panic:%+v", err)
 	}
-	if err := router.LoadConfig(); err != nil {
+	if err := routerNew.LoadConfig(); err != nil {
 		log.Panic("proxy.router.load.panic:%+v", err)
 	}
 	if err := scatter.LoadConfig(); err != nil {
 		log.Panic("proxy.scatter.load.config.panic:%+v", err)
 	}
 
-	spanner := NewSpanner(log, conf, iptable, router, scatter, binlog, sessions, audit, throttle)
+	spanner := NewSpanner(log, conf, iptable, routerNew, scatter, binlogNew, sessions, auditNew, throttle)
 	if err := spanner.Init(); err != nil {
 		log.Panic("proxy.spanner.init.panic:%+v", err)
 	}

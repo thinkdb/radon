@@ -9,7 +9,7 @@
 package binlog
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"math/rand"
 	"os"
 	"sync"

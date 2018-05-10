@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"strings"
 	"testing"
 
@@ -21,19 +21,19 @@ import (
 
 func TestCtlV1Backendz(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxy)),
+		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/debug/backendz", BackendzHandler(log, proxy)),
+			rest.Get("/v1/debug/backendz", BackendzHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()

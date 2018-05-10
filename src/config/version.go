@@ -13,7 +13,7 @@ import (
 	"io/ioutil"
 	"path"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/pkg/errors"
 )

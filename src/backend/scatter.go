@@ -9,7 +9,7 @@
 package backend
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"io/ioutil"
 	"os"
 	"path"

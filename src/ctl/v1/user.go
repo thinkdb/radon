@@ -11,7 +11,7 @@ package v1
 import (
 	"fmt"
 	"net/http"
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 
 	"github.com/ant0ine/go-json-rest/rest"
 	"github.com/xelabs/go-mysqlstack/xlog"

@@ -10,9 +10,9 @@ package planner
 
 import (
 	"encoding/json"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 	"sort"
-	"xcontext"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/pkg/errors"
 

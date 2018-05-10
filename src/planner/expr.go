@@ -10,7 +10,7 @@ package planner
 
 import (
 	"fmt"
-	"router"
+	"github.com/thinkdb/radon/src/router"
 
 	"github.com/pkg/errors"
 

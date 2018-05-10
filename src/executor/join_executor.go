@@ -9,8 +9,8 @@
 package executor
 
 import (
-	"planner"
-	"xcontext"
+	"github.com/thinkdb/radon/src/planner"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )

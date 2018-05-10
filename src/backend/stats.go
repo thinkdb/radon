@@ -10,7 +10,7 @@ package backend
 
 import (
 	"time"
-	"xbase/stats"
+	"github.com/thinkdb/radon/src/xbase/stats"
 )
 
 var (

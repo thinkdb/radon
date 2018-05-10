@@ -9,14 +9,14 @@
 package main
 
 import (
-	"build"
-	"config"
-	"ctl"
+	"github.com/thinkdb/radon/src/build"
+	"github.com/thinkdb/radon/src/config"
+	"github.com/thinkdb/radon/src/ctl"
 	"flag"
 	"fmt"
 	"os"
 	"os/signal"
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"runtime"
 	"syscall"
 
@@ -40,8 +40,8 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	log := xlog.NewStdLog(xlog.Level(xlog.DEBUG))
 
-	build := build.GetInfo()
-	fmt.Printf("radon:[%+v]\n", build)
+	buildInfo := build.GetInfo()
+	fmt.Printf("radon:[%+v]\n", buildInfo)
 
 	// config
 	flag.Usage = func() { usage() }
@@ -58,11 +58,11 @@ func main() {
 	log.SetLevel(conf.Log.Level)
 
 	// Proxy.
-	proxy := proxy.NewProxy(log, flag_conf, conf)
-	proxy.Start()
+	proxyProxy := proxy.NewProxy(log, flag_conf, conf)
+	proxyProxy.Start()
 
 	// Admin portal.
-	admin := ctl.NewAdmin(log, proxy)
+	admin := ctl.NewAdmin(log, proxyProxy)
 	admin.Start()
 
 	// Handle SIGINT and SIGTERM.
@@ -71,6 +71,6 @@ func main() {
 	log.Info("radon.signal:%+v", <-ch)
 
 	// Stop the proxy and httpserver.
-	proxy.Stop()
+	proxyProxy.Stop()
 	admin.Stop()
 }

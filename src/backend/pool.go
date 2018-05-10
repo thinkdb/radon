@@ -10,13 +10,13 @@ package backend
 
 import (
 	"bytes"
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"errors"
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
-	"xbase/stats"
+	"github.com/thinkdb/radon/src/xbase/stats"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )

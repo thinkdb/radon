@@ -9,7 +9,7 @@
 package proxy
 
 import (
-	"backend"
+	"github.com/thinkdb/radon/src/backend"
 	"sort"
 	"sync"
 	"time"

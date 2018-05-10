@@ -9,12 +9,12 @@
 package audit
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )

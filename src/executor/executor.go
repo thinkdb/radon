@@ -9,9 +9,9 @@
 package executor
 
 import (
-	"backend"
-	"planner"
-	"xcontext"
+	"github.com/thinkdb/radon/src/backend"
+	"github.com/thinkdb/radon/src/planner"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/pkg/errors"
 

@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 
 	"github.com/ant0ine/go-json-rest/rest"
@@ -22,13 +22,13 @@ import (
 
 func TestCtlV1Explain(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
 	// fakedbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
 	}
 
 	// create test table.
@@ -44,7 +44,7 @@ func TestCtlV1Explain(t *testing.T) {
 		// server
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Post("/v1/radon/explain", ExplainHandler(log, proxy)),
+			rest.Post("/v1/radon/explain", ExplainHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()

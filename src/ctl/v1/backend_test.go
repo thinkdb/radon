@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 
 	"github.com/ant0ine/go-json-rest/rest"
@@ -19,13 +19,13 @@ import (
 
 func TestCtlV1BackendAdd(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxy)),
+		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -45,13 +45,13 @@ func TestCtlV1BackendAdd(t *testing.T) {
 
 func TestCtlV1BackendAddError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxy)),
+		rest.Post("/v1/radon/backend", AddBackendHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -77,13 +77,13 @@ func TestCtlV1BackendAddError(t *testing.T) {
 
 func TestCtlV1BackendRemove(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Delete("/v1/radon/backend/:name", RemoveBackendHandler(log, proxy)),
+		rest.Delete("/v1/radon/backend/:name", RemoveBackendHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -96,13 +96,13 @@ func TestCtlV1BackendRemove(t *testing.T) {
 
 func TestCtlV1BackendRemoveError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Delete("/v1/radon/backend/:name", RemoveBackendHandler(log, proxy)),
+		rest.Delete("/v1/radon/backend/:name", RemoveBackendHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -117,13 +117,13 @@ func TestCtlV1BackendRemoveError(t *testing.T) {
 // backup
 func TestCtlV1BackupAdd(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/radon/backup", AddBackupHandler(log, proxy)),
+		rest.Post("/v1/radon/backup", AddBackupHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -143,13 +143,13 @@ func TestCtlV1BackupAdd(t *testing.T) {
 
 func TestCtlV1BackupAddError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxyWithBackup(log)
+	_, proxyNew, cleanup := proxy.MockProxyWithBackup(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/radon/backup", AddBackupHandler(log, proxy)),
+		rest.Post("/v1/radon/backup", AddBackupHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -175,13 +175,13 @@ func TestCtlV1BackupAddError(t *testing.T) {
 
 func TestCtlV1BackupRemove(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxyWithBackup(log)
+	_, proxyNew, cleanup := proxy.MockProxyWithBackup(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Delete("/v1/radon/backup/:name", RemoveBackupHandler(log, proxy)),
+		rest.Delete("/v1/radon/backup/:name", RemoveBackupHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -194,13 +194,13 @@ func TestCtlV1BackupRemove(t *testing.T) {
 
 func TestCtlV1BackupRemoveError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Delete("/v1/radon/backup/:name", RemoveBackupHandler(log, proxy)),
+		rest.Delete("/v1/radon/backup/:name", RemoveBackupHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -214,13 +214,13 @@ func TestCtlV1BackupRemoveError(t *testing.T) {
 
 func TestCtlV1BackupConfig(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxyWithBackup(log)
+	_, proxyNew, cleanup := proxy.MockProxyWithBackup(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Get("/v1/radon/backupconfig", BackupConfigHandler(log, proxy)),
+		rest.Get("/v1/radon/backupconfig", BackupConfigHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()

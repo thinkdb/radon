@@ -10,7 +10,7 @@ package proxy
 
 import (
 	"errors"
-	"fakedb"
+	"github.com/thinkdb/radon/src/fakedb"
 	"fmt"
 	"testing"
 

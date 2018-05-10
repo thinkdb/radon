@@ -9,7 +9,7 @@
 package main
 
 import (
-	"cli/cmd"
+	"github.com/thinkdb/radon/src/cli/cmd"
 	"fmt"
 	"os"
 

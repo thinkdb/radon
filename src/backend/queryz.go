@@ -13,7 +13,7 @@ import (
 	"sort"
 	"sync"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 )
 
 // QueryDetail is a simple wrapper for Query

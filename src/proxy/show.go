@@ -9,7 +9,7 @@
 package proxy
 
 import (
-	"build"
+	"github.com/thinkdb/radon/src/build"
 	"bytes"
 	"encoding/json"
 	"fmt"

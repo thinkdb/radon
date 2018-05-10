@@ -9,11 +9,11 @@
 package binlog
 
 import (
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"os"
 	"sync"
 	"time"
-	"xbase"
+	"github.com/thinkdb/radon/src/xbase"
 
 	"github.com/xelabs/go-mysqlstack/common"
 	"github.com/xelabs/go-mysqlstack/xlog"

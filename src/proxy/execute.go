@@ -10,10 +10,10 @@ package proxy
 
 import (
 	"errors"
-	"executor"
-	"optimizer"
-	"planner"
-	"xcontext"
+	"github.com/thinkdb/radon/src/executor"
+	"github.com/thinkdb/radon/src/optimizer"
+	"github.com/thinkdb/radon/src/planner"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/xelabs/go-mysqlstack/driver"
 	"github.com/xelabs/go-mysqlstack/sqlparser"

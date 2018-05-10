@@ -10,8 +10,8 @@ package v1
 
 import (
 	"net/http"
-	"optimizer"
-	"proxy"
+	"github.com/thinkdb/radon/src/optimizer"
+	"github.com/thinkdb/radon/src/proxy"
 
 	"github.com/ant0ine/go-json-rest/rest"
 	"github.com/xelabs/go-mysqlstack/xlog"

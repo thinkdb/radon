@@ -14,7 +14,7 @@ import (
 	"sync"
 	"testing"
 	"time"
-	"xcontext"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/fortytw2/leaktest"
 	"github.com/stretchr/testify/assert"

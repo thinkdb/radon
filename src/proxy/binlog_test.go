@@ -9,7 +9,7 @@
 package proxy
 
 import (
-	"fakedb"
+	"github.com/thinkdb/radon/src/fakedb"
 	"os"
 	"testing"
 

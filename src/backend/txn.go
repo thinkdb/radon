@@ -12,10 +12,10 @@ import (
 	"fmt"
 	"sync"
 	"time"
-	"xcontext"
+	"github.com/thinkdb/radon/src/xcontext"
 
 	"github.com/pkg/errors"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 
 	"github.com/xelabs/go-mysqlstack/driver"
 	"github.com/xelabs/go-mysqlstack/sqldb"

@@ -11,8 +11,8 @@ package proxy
 import (
 	"sync"
 	"time"
-	"xbase"
-	"xbase/sync2"
+	"github.com/thinkdb/radon/src/xbase"
+	"github.com/thinkdb/radon/src/xbase/sync2"
 
 	"github.com/xelabs/go-mysqlstack/xlog"
 )

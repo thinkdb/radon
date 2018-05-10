@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"strings"
 	"testing"
 
@@ -23,13 +23,13 @@ import (
 
 func TestCtlV1Configz(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	fakedbs, proxy, cleanup := proxy.MockProxy(log)
+	fakeDbs, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
-	address := proxy.Address()
+	address := proxyNew.Address()
 
-	// fakedbs.
+	// fakeDbs.
 	{
-		fakedbs.AddQueryPattern("create table .*", &sqltypes.Result{})
+		fakeDbs.AddQueryPattern("create table .*", &sqltypes.Result{})
 	}
 	// create test table.
 	{
@@ -43,7 +43,7 @@ func TestCtlV1Configz(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/debug/configz", ConfigzHandler(log, proxy)),
+			rest.Get("/v1/debug/configz", ConfigzHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()

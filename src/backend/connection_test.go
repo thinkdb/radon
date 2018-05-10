@@ -10,7 +10,7 @@ package backend
 
 import (
 	"errors"
-	"fakedb"
+	"github.com/thinkdb/radon/src/fakedb"
 	"testing"
 
 	"github.com/fortytw2/leaktest"

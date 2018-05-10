@@ -10,7 +10,7 @@ package router
 
 import (
 	"bytes"
-	"config"
+	"github.com/thinkdb/radon/src/config"
 	"fmt"
 	"sort"
 	"strconv"

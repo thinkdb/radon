@@ -9,7 +9,7 @@
 package v1
 
 import (
-	"proxy"
+	"github.com/thinkdb/radon/src/proxy"
 	"testing"
 
 	"github.com/ant0ine/go-json-rest/rest"
@@ -20,13 +20,13 @@ import (
 
 func TestCtlV1PeerAdd(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/peer/add", AddPeerHandler(log, proxy)),
+		rest.Post("/v1/peer/add", AddPeerHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -42,13 +42,13 @@ func TestCtlV1PeerAdd(t *testing.T) {
 
 func TestCtlV1PeerAddError(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_, proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/peer/add", AddPeerHandler(log, proxy)),
+		rest.Post("/v1/peer/add", AddPeerHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -68,13 +68,13 @@ func TestCtlV1PeerAddError(t *testing.T) {
 
 func TestCtlV1PeerRemove(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_,proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/peer/remove", RemovePeerHandler(log, proxy)),
+		rest.Post("/v1/peer/remove", RemovePeerHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -90,13 +90,13 @@ func TestCtlV1PeerRemove(t *testing.T) {
 
 func TestCtlV1Peers(t *testing.T) {
 	log := xlog.NewStdLog(xlog.Level(xlog.PANIC))
-	_, proxy, cleanup := proxy.MockProxy(log)
+	_,proxyNew, cleanup := proxy.MockProxy(log)
 	defer cleanup()
 
 	// server
 	api := rest.NewApi()
 	router, _ := rest.MakeRouter(
-		rest.Post("/v1/peer/add", AddPeerHandler(log, proxy)),
+		rest.Post("/v1/peer/add", AddPeerHandler(log, proxyNew)),
 	)
 	api.SetApp(router)
 	handler := api.MakeHandler()
@@ -112,7 +112,7 @@ func TestCtlV1Peers(t *testing.T) {
 	{
 		api := rest.NewApi()
 		router, _ := rest.MakeRouter(
-			rest.Get("/v1/peer/peerz", PeerzHandler(log, proxy)),
+			rest.Get("/v1/peer/peerz", PeerzHandler(log, proxyNew)),
 		)
 		api.SetApp(router)
 		handler := api.MakeHandler()
